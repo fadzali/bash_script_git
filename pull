@@ -28,4 +28,4 @@ IFS=$'\n'
     echo "Done at `date`"
     echo
   fi
-cat ~/kerong.txt | sudo -S service nginx restart
+cat ~/passbox.txt | sudo -S service nginx restart
