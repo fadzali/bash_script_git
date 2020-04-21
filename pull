@@ -1,0 +1,31 @@
+#!/bin/bash
+
+################
+
+# credit to https://gist.github.com/mnem/1438396
+# Git command and by pass sudo password
+# alter by Mohd Fadzali Bakar 21 FEB 2020
+#
+REPOSITORIES="/usr/share/nginx"
+REPO="frapi"
+
+IFS=$'\n'
+
+  if [ -d "$REPOSITORIES/$REPO" ]
+  then
+    echo "Updating $REPOSITORIES/$REPO at `date`"
+    if [ -d "$REPOSITORIES/$REPO/.git" ]
+    then
+      cd "$REPOSITORIES/$REPO"
+      cat ~/passbox.txt | sudo -S git status
+      echo "Fetching"
+      cat ~/passbox.txt | sudo -S git fetch
+      echo "Pulling"
+      cat ~/passbox.txt | sudo -S git pull
+    else
+      echo "Skipping because it doesn't look like it has a .git folder."
+    fi
+    echo "Done at `date`"
+    echo
+  fi
+cat ~/kerong.txt | sudo -S service nginx restart
